@@ -14,6 +14,7 @@
 	--grey-green: #829b91;
 	--olive: #f0f1f1;
 	--green-hover: #6d7b75;
+	--header-height: 72px;
 }
 
 :root {
@@ -31,6 +32,7 @@ body {
   font-family: var(--font-family);
 
   width: 100%;
+  height: 100%;
   margin: 0;
 }
 

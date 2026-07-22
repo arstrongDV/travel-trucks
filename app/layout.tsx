@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Manrope } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/Header";
 
 const interSans = Inter({
   variable: "--font-inter-sans",
@@ -27,7 +28,10 @@ export default function RootLayout({
       lang="en"
       className={`${interSans.variable} ${manrope.variable}`}
     >
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }
