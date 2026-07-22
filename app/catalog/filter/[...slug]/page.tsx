@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import CatalogPageClient from './CatalogPageClient';
-import { PER_PAGE } from '../../constans/constants';
+import { PER_PAGE } from '../../../../constans/constants';
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 import { getCampers } from '@/services/campers';
 
