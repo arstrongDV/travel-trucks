@@ -1,6 +1,6 @@
 'use client'
 import { getCampers } from '@/services/campers';
-import { PER_PAGE } from '../../constans/constants';
+import { PER_PAGE } from '../../../../constans/constants';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useState } from 'react'
 
