@@ -1,0 +1,35 @@
+.headerContainer{
+    border-bottom: 1px solid var(--badges);
+    padding: 0 64px;
+    height: var(--header-height);
+    width: 100%;
+    background: var(--inputs);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+
+}
+
+.menu{
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    .link{
+        font-family: var(--font-family);
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 150%;
+        text-align: center;
+        color: var(--main);
+    }
+
+    .activeLink{
+        color: var(--grey-green);
+    }
+}
