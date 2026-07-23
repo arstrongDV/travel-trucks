@@ -1,0 +1,37 @@
+.container{
+    padding: 48px 63px;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 32px;
+}
+
+/* .trucksListContainer{
+    display: block;
+    width: 100%;
+} */
+
+.trucksList{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.btnLoadMore{
+    display: block;
+    margin: 40px auto 0 auto;
+
+    border: 1px solid var(--gray-light);
+    border-radius: 200px;
+    padding: 16px 32px;
+
+    cursor: pointer;
+
+    transition: border 250ms ease-in;
+}
+
+.btnLoadMore:hover{
+    border: 1px solid var(--green-hover);
+}

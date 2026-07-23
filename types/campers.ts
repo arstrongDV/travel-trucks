@@ -1,4 +1,4 @@
-export type From = 'alcove' | 'panel_van' | 'integrated' | 'semi_integrated';
+export type Form = 'alcove' | 'panel_van' | 'integrated' | 'semi_integrated';
 
 export type Transmission = 'automatic' | 'manual';
 
@@ -10,11 +10,12 @@ export interface Campers {
     price: number;
     rating: number;
     location: string;
-    form: From;
+    form: Form;
     length: string;
     width: string;
     height: string;
     tank: string;
+    description: string;
     consumption: string;
     transmission: Transmission;
     engine: Engine;

@@ -1,24 +1,69 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import style from './Sidebar.module.css'
 import { CiMap } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
 import { useQuery } from '@tanstack/react-query';
 import { getCampersFilters } from '@/services/campers';
 import { FromFilters, EngineFilters, TransmissionFilters } from '../../constans/filters'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useCatalogLoading } from '../ui/Loader/CatalogLoadingProvider';
 
 const Sidebar = () => {
+    const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+    const { setSectionLoading } = useCatalogLoading();
+    const [isFormEmpty, setIsFormEmpty] = useState(true);
 
     const {data, isLoading, isError} = useQuery({
         queryKey: ["filters"],
         queryFn: () => getCampersFilters()
     })
 
-    if(isLoading) return <p role="status">Loading...</p>
+    useEffect(() => {
+        setSectionLoading('sidebar', isLoading);
+    }, [isLoading, setSectionLoading]);
+
+    const onSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+        e.preventDefault()
+
+        const formData = new FormData(e.currentTarget)
+        const params = new URLSearchParams(searchParams.toString())
+
+        for (const [key, value] of formData.entries()) {
+            if (value) {
+                if(key == "location") {
+                    params.set(key, (value as string).trim().toLowerCase())
+                } else{
+                    params.set(key, value as string)
+                }
+            } else {
+                params.delete(key)
+            }
+        }
+
+        router.push(`${pathname}?${params.toString()}`)
+    }
+
+    const onFormChange = (e: React.ChangeEvent<HTMLFormElement>) => {
+        const formData = new FormData(e.currentTarget)
+        const hasValue = Array.from(formData.values()).some(
+            (value) => typeof value === 'string' && value.trim() !== ''
+        )
+        setIsFormEmpty(!hasValue)
+    }
+
+    if(isError) return <p>Error</p>
 
   return (
     <aside className={style.sidebarContainer}>
-        <form className={style.filtersWrapper} onSubmit={(e) => e.preventDefault()}>
+        <form
+            className={style.filtersWrapper}
+            onSubmit={onSubmit}
+            onChange={onFormChange}
+            onReset={() => setIsFormEmpty(true)}
+        >
             <label className={style.locationFillter} htmlFor="location">
                 Location
 
@@ -54,11 +99,11 @@ const Sidebar = () => {
                 <fieldset className={style.listWrapper}>
                     <legend>Engine</legend>
                     <ul className={style.filterList}>
-                        {data?.engines.map((form) => (
-                            <li key={form}>
+                        {data?.engines.map((engine) => (
+                            <li key={engine}>
                                 <label className={style.listItem}>
-                                    <input type='radio' name="form" value={form} />
-                                    <span>{EngineFilters[form]}</span>
+                                    <input type='radio' name="engine" value={engine} />
+                                    <span>{EngineFilters[engine]}</span>
                                 </label>
                             </li>
                         ))}
@@ -68,11 +113,11 @@ const Sidebar = () => {
                 <fieldset className={style.listWrapper}>
                     <legend>Transmission</legend>
                     <ul className={style.filterList}>
-                        {data?.transmissions.map((form) => (
-                            <li key={form}>
+                        {data?.transmissions.map((transmission) => (
+                            <li key={transmission}>
                                 <label className={style.listItem}>
-                                    <input type='radio' name="form" value={form} />
-                                    <span>{TransmissionFilters[form]}</span>
+                                    <input type='radio' name="transmission" value={transmission} />
+                                    <span>{TransmissionFilters[transmission]}</span>
                                 </label>
                             </li>
                         ))}
@@ -81,8 +126,8 @@ const Sidebar = () => {
             </div>
 
             <div className={style.btns}>
-                <button type="submit">Search</button>
-                <button type="reset"> <RxCross1 aria-hidden="true"/>  Clear filters</button>
+                <button className={style.btnSearch} type="submit" disabled={isFormEmpty}>Search</button>
+                <button className={style.btnReset} type="reset" onClick={() => router.push(pathname)}> <RxCross1 aria-hidden="true"/>  Clear filters</button>
             </div>
         </form>
     </aside>
