@@ -3,7 +3,7 @@ import {
     CamperReview, 
     Campers, 
     Engine, 
-    From, 
+    Form, 
     Transmission 
 } from "@/types/campers";
 
@@ -14,7 +14,7 @@ export interface getCampersParams {
     page?: number;
     perPage?: number;
     location?: string;
-    from?: From;
+    form?: Form;
     transmission?: Transmission;
     engine?: Engine;
 }
@@ -28,7 +28,7 @@ interface getCampersResponse {
 }
 
 interface getCampersFiltersResponse {
-    forms: From[],
+    forms: Form[],
     transmissions: Transmission[],
     engines: Engine[]
 }
