@@ -9,6 +9,7 @@ import { LiaSitemapSolid } from "react-icons/lia";
 import { FaCarAlt } from "react-icons/fa";
 import LinesEllipsis from 'react-lines-ellipsis'
 import {FromFilters, EngineFilters, TransmissionFilters} from '../../constans/filters'
+import Link from 'next/link';
 
 interface TruckCardProps {
     truck: Campers;
@@ -70,7 +71,14 @@ const TruckCard = ({ truck }: TruckCardProps) => {
                     </li>
                 </ul>
 
-                <button className={style.btnShowMore}>Show more</button>
+                <Link 
+                    className={style.btnShowMore}
+                    href={`/catalog/${truck.id}`}
+                    target='_blank'
+                    rel="noopener noreferrer"
+                >
+                    Show more
+                </Link>
             </span>
         </div>
     </div>

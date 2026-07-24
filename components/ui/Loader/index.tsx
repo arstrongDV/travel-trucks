@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom';
 import { Oval } from 'react-loader-spinner';
 import style from './Loader.module.css'
+import SmallLoader from './SmallLoader';
 
 const Loader = () => {
   const [mounted, setMounted] = useState(false)
@@ -15,17 +16,8 @@ const Loader = () => {
   return createPortal((
     <div className={style.backdrop}>
       <div className={style.loaderContaier}>
-          <Oval
-              visible={true}
-              height="80"
-              width="80"
-              color="#5c7069"
-              secondaryColor="#f0f0f0"
-              strokeWidth={3}
-              strokeWidthSecondary={3}
-              ariaLabel="loading"
-          />
-
+          <SmallLoader />
+          
           <div className={style.loaderText}>
             <h4>Loading tracks...</h4>
 

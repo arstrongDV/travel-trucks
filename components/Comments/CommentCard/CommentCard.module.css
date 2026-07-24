@@ -1,0 +1,42 @@
+.commentContainer{
+    border-radius: 16px;
+    padding: 16px;
+    width: 100%;
+    /* max-width: 623px; */
+    width: 100%;
+    background: var(--inputs);
+}
+
+.userInfo{
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.reviews{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
+}
+
+.comment{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: var(--text);
+
+    margin-top: 16px;
+}
+
+.rating {
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.starIcon {
+    width: 16px;
+    height: 16px;
+    fill: var(--rating);
+}

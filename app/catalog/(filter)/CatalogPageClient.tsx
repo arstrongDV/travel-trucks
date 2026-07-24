@@ -6,6 +6,7 @@ import { getCampers, getCampersParams } from '@/services/campers';
 import style from './Layout.module.css'
 import TruckCard from '@/components/TruckCard';
 import { useCatalogLoading } from '@/components/ui/Loader/CatalogLoadingProvider';
+import NotFound from '@/components/ui/NotFound';
 
 interface CatalogPageClientProps {
     initialParams: getCampersParams;
@@ -59,6 +60,8 @@ const {
   const campers = data?.pages.flatMap((p) => p.campers) ?? [];
 
   if (isError) return <p>Something went wrong.</p>
+
+  if (!isLoading && campers.length === 0) return <NotFound />
 
   return (
     <aside className={style.trucksListContainer}>

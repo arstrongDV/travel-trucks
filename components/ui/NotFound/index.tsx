@@ -1,8 +1,13 @@
 import React from 'react'
 import style from './NotFound.module.css'
 import Image from 'next/image'
+import { RxCross1 } from "react-icons/rx";
+import { usePathname, useRouter } from 'next/navigation';
 
 const NotFound = () => {
+    const router = useRouter();
+    const pathname = usePathname();
+
   return (
     <section className={style.notFoundContainer}>
       <Image className={style.notFoundImage} src='/images/notFound.png' alt="not found" width={488} height={463} />
@@ -13,7 +18,8 @@ const NotFound = () => {
       </div>
 
       <div className={style.notFoundBtns}>
-
+            <button className={style.btnSearch} onClick={() => router.push('/catalog')}>Search</button>
+            <button className={style.btnReset} onClick={() => router.push(pathname)}> <RxCross1 aria-hidden="true"/>  Clear filters</button>
       </div>
     </section>
   )

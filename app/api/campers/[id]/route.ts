@@ -5,11 +5,11 @@ import { logErrorResponse } from '../_utils/utils';
 
 export async function GET(
   _req: NextRequest,
-  { params }: { params: Promise<{ camperId: string }> }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { camperId } = await params;
-    const res = await api.get(`/campers/${camperId}`);
+    const { id } = await params;
+    const res = await api.get(`/campers/${id}`);
 
     return NextResponse.json(res.data);
   } catch (error) {

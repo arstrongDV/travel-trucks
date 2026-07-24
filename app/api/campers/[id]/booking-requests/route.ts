@@ -5,12 +5,12 @@ import { logErrorResponse } from '../../_utils/utils';
 
 export async function POST(
   _req: NextRequest,
-  { params }: { params: Promise<{ camperId: string }> }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { camperId } = await params;
+    const { id } = await params;
     const body = await _req.json();
-    const res = await api.post(`/campers/${camperId}/booking-requests`, body);
+    const res = await api.post(`/campers/${id}/booking-requests`, body);
 
     return NextResponse.json(res.data);
   } catch (error) {

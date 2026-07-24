@@ -24,7 +24,7 @@ export interface Campers {
     totalReviews: number;
 }
 
-interface CamperGallery {
+export interface CamperGallery {
     id: string;
     camperId: string;
     thumb: string;
