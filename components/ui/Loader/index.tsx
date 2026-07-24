@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom';
-import { Oval } from 'react-loader-spinner';
 import style from './Loader.module.css'
 import SmallLoader from './SmallLoader';
 
@@ -8,6 +7,7 @@ const Loader = () => {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- SSR-safe portal gate: document.body only exists client-side, so mounting flips once after hydration.
     setMounted(true)
   }, [])
 

@@ -1,29 +1,23 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import style from './Sidebar.module.css'
 import { CiMap } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { getCampersFilters } from '@/services/campers';
 import { FromFilters, EngineFilters, TransmissionFilters } from '../../constans/filters'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useCatalogLoading } from '../ui/Loader/CatalogLoadingProvider';
 
 const Sidebar = () => {
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
-    const { setSectionLoading } = useCatalogLoading();
     const [isFormEmpty, setIsFormEmpty] = useState(true);
 
-    const {data, isLoading, isError} = useQuery({
+    const {data} = useSuspenseQuery({
         queryKey: ["filters"],
         queryFn: () => getCampersFilters()
     })
-
-    useEffect(() => {
-        setSectionLoading('sidebar', isLoading);
-    }, [isLoading, setSectionLoading]);
 
     const onSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -53,8 +47,6 @@ const Sidebar = () => {
         )
         setIsFormEmpty(!hasValue)
     }
-
-    if(isError) return <p>Error</p>
 
   return (
     <aside className={style.sidebarContainer}>

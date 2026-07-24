@@ -1,8 +1,14 @@
 .bookFormContainer{
     border: 1px solid var(--gray-light);
     border-radius: 16px;
-    padding: 44px;
+    padding: 24px;
     width: 100%;
+}
+
+@media (min-width: 768px){
+    .bookFormContainer{
+        padding: 44px;
+    }
 }
 
 .topText{

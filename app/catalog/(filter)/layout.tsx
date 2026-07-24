@@ -1,39 +1,17 @@
-'use client'
-import React from 'react'
+import type { ReactNode } from 'react'
 import style from './Layout.module.css'
-import { CatalogLoadingProvider, useCatalogLoading } from '@/components/ui/Loader/CatalogLoadingProvider'
-import Loader from '@/components/ui/Loader'
 
-function CatalogLayoutContent({
+export default function CatalogLayout({
   children,
-  sidebar
+  sidebar,
 }: Readonly<{
-  children: React.ReactNode;
-  sidebar: React.ReactNode;
+  children: ReactNode;
+  sidebar: ReactNode;
 }>) {
-  const { isLoading } = useCatalogLoading()
-
   return (
     <div className={style.container}>
-      {isLoading && <Loader />}
-      <div style={{ display: isLoading ? 'none' : 'contents' }}>
-        {sidebar}
-        {children}
-      </div>
+      {sidebar}
+      {children}
     </div>
-  )
-}
-
-export default function RootLayout({
-  children,
-  sidebar
-}: Readonly<{
-  children: React.ReactNode;
-  sidebar: React.ReactNode;
-}>) {
-  return (
-    <CatalogLoadingProvider>
-      <CatalogLayoutContent sidebar={sidebar}>{children}</CatalogLayoutContent>
-    </CatalogLoadingProvider>
   );
 }

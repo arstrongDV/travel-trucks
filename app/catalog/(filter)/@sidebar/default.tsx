@@ -1,11 +1,23 @@
-import Sidebar from '@/components/Sidebar'
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
 import { Suspense } from 'react'
+import Sidebar from '@/components/Sidebar'
+import SmallLoader from '@/components/ui/Loader/SmallLoader'
+import { getCampersFilters } from '@/services/campers'
 
-const SideBar = () => {
+const SideBar = async () => {
+  const queryClient = new QueryClient()
+
+  await queryClient.prefetchQuery({
+    queryKey: ['filters'],
+    queryFn: getCampersFilters,
+  })
+
   return (
-    <Suspense fallback={<p role="status">Loading...</p>}>
-      <Sidebar />
-    </Suspense>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <Suspense fallback={<SmallLoader />}>
+        <Sidebar />
+      </Suspense>
+    </HydrationBoundary>
   )
 }
 

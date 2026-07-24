@@ -1,11 +1,10 @@
 'use client'
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { keepPreviousData, useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useInfiniteQuery } from '@tanstack/react-query';
 import { getCampers, getCampersParams } from '@/services/campers';
 import style from './Layout.module.css'
 import TruckCard from '@/components/TruckCard';
-import { useCatalogLoading } from '@/components/ui/Loader/CatalogLoadingProvider';
 import NotFound from '@/components/ui/NotFound';
 
 interface CatalogPageClientProps {
@@ -14,25 +13,20 @@ interface CatalogPageClientProps {
 
 const CatalogPageClient = ({ initialParams }: CatalogPageClientProps) => {
   const searchParams = useSearchParams();
-  const [page, setPage] = useState(initialParams.page ?? 1);
 
   const location = searchParams.get('location') || undefined;
   const form = (searchParams.get('form') as getCampersParams['form']) || undefined;
   const engine = (searchParams.get('engine') as getCampersParams['engine']) || undefined;
   const transmission = (searchParams.get('transmission') as getCampersParams['transmission']) || undefined;
 
-  useEffect(() => {
-    setPage(1);
-  }, [location, form, engine, transmission]);
-
   const params: getCampersParams = useMemo(() => ({
-    page,
+    page: initialParams.page ?? 1,
     perPage: initialParams.perPage,
     ...(location && { location }),
     ...(form && { form }),
     ...(engine && { engine }),
     ...(transmission && { transmission }),
-  }), [page, initialParams.perPage, location, form, engine, transmission]);
+  }), [initialParams.page, initialParams.perPage, location, form, engine, transmission]);
 
 const { 
     data, 
@@ -50,12 +44,6 @@ const {
     },
     placeholderData: keepPreviousData,
   })
-
-  const { setSectionLoading } = useCatalogLoading();
-
-  useEffect(() => {
-    setSectionLoading('trucks', isLoading);
-  }, [isLoading, setSectionLoading]);
 
   const campers = data?.pages.flatMap((p) => p.campers) ?? [];
 

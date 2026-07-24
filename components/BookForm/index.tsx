@@ -71,11 +71,11 @@ const BookForm = ({ catalogId }: BookFormProps) => {
         </div>
 
         <div className={style.inputGroup}>
-            {errors.name && (
+            {errors.email && (
                 <div className={style.errorLabel}>Email*</div>
             )}
           <input
-            className={`${style.input} ${ errors.name && style.inputError}`}
+            className={`${style.input} ${ errors.email && style.inputError}`}
             type="email"
             id="email"
             placeholder="Email*"

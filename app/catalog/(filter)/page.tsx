@@ -40,7 +40,7 @@ export async function generateMetadata({ searchParams }: CatalogPageProps): Prom
         openGraph: {
             title,
             description,
-            url: `http://localhost:3000/catalog${query ? `?${query}` : ''}`,
+            url: `/catalog${query ? `?${query}` : ''}`,
             siteName: 'TravelTrucks',
             type: 'website',
             images: [{

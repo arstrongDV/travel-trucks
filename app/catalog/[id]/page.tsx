@@ -1,5 +1,8 @@
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
+import { isAxiosError } from 'axios';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { cache } from 'react';
 import CatalogDetailsPageClient from './CatalogDetailsPageClient';
 import { getCamper, getCamperReviews } from '@/services/campers';
 
@@ -7,9 +10,20 @@ interface catalogDetailsProps {
     params: Promise<{id: string}>;
 }
 
+const getCamperOrNotFound = cache(async (id: string) => {
+    try {
+        return await getCamper(id);
+    } catch (error) {
+        if (isAxiosError(error) && error.response?.status === 404) {
+            notFound();
+        }
+        throw error;
+    }
+})
+
 export async function generateMetadata({ params }: catalogDetailsProps): Promise<Metadata> {
     const { id } = await params;
-    const camper = await getCamper(id);
+    const camper = await getCamperOrNotFound(id);
 
     return{
         title: camper.name,
@@ -17,7 +31,7 @@ export async function generateMetadata({ params }: catalogDetailsProps): Promise
         openGraph: {
             title: camper.name,
             description: camper.description,
-            url: `http://localhost:3000/catalog/${id}`,
+            url: `/catalog/${id}`,
             siteName: 'TravelTrucks',
             images: [{
                 url: '/images/heroImage.jpg',
@@ -35,7 +49,7 @@ const CatalogDetailsPage = async ({ params }: catalogDetailsProps) => {
 
     await queryClient.prefetchQuery({
     queryKey: ["camper", id],
-    queryFn: () => getCamper(id)
+    queryFn: () => getCamperOrNotFound(id)
     })
     await queryClient.prefetchQuery({
     queryKey: ["camper-reviews", id],
