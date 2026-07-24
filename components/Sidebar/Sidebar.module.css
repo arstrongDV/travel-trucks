@@ -2,7 +2,7 @@
     position: relative;
     border-radius: 20px;
     padding: 24px;
-    max-width: 360px;
+    min-width: 360px;
     background: var(--inputs);
 }
 
@@ -130,12 +130,14 @@
   background-color: transparent;
   padding: 0;
   cursor: pointer;
+  scale: 1;
   transition: padding 250ms ease-in, 
-    border 250ms ease-in;
+    border 250ms ease-in, scale 250ms ease-in;
 }
 
 .listItem input[type="radio"]:hover{
     border: 1px solid var(--main);
+    scale: 1.1;
 }
 
 .listItem input[type="radio"]:checked {
@@ -143,6 +145,7 @@
   background-color: var(--text);
   background-clip: content-box;
   padding: 5px;
+  scale: 1;
 }
 
 /* 4. Accessibility: outline on keyboard focus */

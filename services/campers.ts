@@ -19,7 +19,7 @@ export interface getCampersParams {
     engine?: Engine;
 }
 
-interface getCampersResponse {
+export interface getCampersResponse {
     page: number,
     perPage: number,
     total: number,
@@ -33,7 +33,7 @@ interface getCampersFiltersResponse {
     engines: Engine[]
 }
 
-interface bookCamperPayload {
+export interface bookCamperPayload {
     name: string;
     email: string
 }
@@ -53,8 +53,8 @@ export const getCamper = async (camperId: string): Promise<Camper> => {
     return res.data;
 }
 
-export const getCamperReviews = async (camperId: string): Promise<CamperReview> => {
-    const res = await nextServer.get<CamperReview>(`/campers/${camperId}/reviews`);
+export const getCamperReviews = async (camperId: string): Promise<CamperReview[]> => {
+    const res = await nextServer.get<CamperReview[]>(`/campers/${camperId}/reviews`);
     return res.data;
 }
 

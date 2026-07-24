@@ -3,6 +3,7 @@ import { Inter, Manrope } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
+import { Toaster } from "react-hot-toast";
 
 const interSans = Inter({
   variable: "--font-inter-sans",
@@ -31,6 +32,8 @@ export default function RootLayout({
     >
       <body suppressHydrationWarning>
         <TanStackProvider>
+          <Toaster position="top-right" reverseOrder={false} />
+
           <Header />
           {children}
         </TanStackProvider>
