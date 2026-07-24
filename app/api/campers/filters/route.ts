@@ -1,9 +1,9 @@
 import { isAxiosError } from 'axios';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { api } from '../../api';
 import { logErrorResponse } from '../_utils/utils';
 
-export async function GET(_req: NextRequest) {
+export async function GET() {
   try {
     const res = await api.get(`/campers/filters`);
 

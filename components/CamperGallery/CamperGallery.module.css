@@ -2,7 +2,17 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    width: 100%;
     max-width: 638px;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (min-width: 1440px) {
+    .galleryContainer{
+        margin: 0;
+    }
 }
 
 .mainSwiper{
@@ -14,8 +24,7 @@
     position: relative;
     width: 100%;
     max-width: 638px;
-    height: 505px;
-    /* aspect-ratio: 638 / 505; */
+    aspect-ratio: 638 / 505;
     border-radius: 16px;
     overflow: hidden;
 }

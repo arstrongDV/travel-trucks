@@ -1,25 +1,25 @@
 .catalogDetailsContainer{
-    padding: 48px 63px;
+    padding: 24px 16px;
     width: 100%;
 }
 
 .topPart{
     display: flex;
+    flex-direction: column;
     gap: 24px;
     width: 100%;
-    justify-content: space-between;
-    align-items: flex-start;
 }
 
 .mainInfo{
     display: flex;
     flex-direction: column;
     gap: 16px;
+    width: 100%;
 }
 
 .truckDescriptionWrapper{
     border-radius: 16px;
-    padding: 24px;
+    padding: 16px;
     background: var(--inputs);
     display: flex;
     flex-direction: column;
@@ -31,7 +31,7 @@
         width: 100%;
 
         font-weight: 600;
-        font-size: 24px;
+        font-size: 20px;
         line-height: 133%;
         color: var(--main);
     }
@@ -52,6 +52,7 @@
 
 .ratingWrapper{
     display: flex;
+    flex-wrap: wrap;
     gap: 16px;
     font-weight: 400;
     font-size: 16px;
@@ -70,7 +71,7 @@
 .starIcon{
     fill: var(--rating);
 }
-.iconMap, 
+.iconMap,
 .starIcon{
     width: 24px;
     height: 24px;
@@ -78,7 +79,7 @@
 
 .price{
     font-weight: 600;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 133%;
     color: var(--main);
 }
@@ -92,7 +93,7 @@
 
 .truckInfoWrapper{
     border-radius: 16px;
-    padding: 24px;
+    padding: 16px;
     background: var(--inputs);
     display: flex;
     flex-direction: column;
@@ -108,7 +109,7 @@
 
     h4{
         font-weight: 600;
-        font-size: 24px;
+        font-size: 20px;
         line-height: 133%;
         color: var(--main);
     }
@@ -116,7 +117,7 @@
 
 .detailsList{
     display: flex;
-    gap: 8;
+    gap: 8px;
     flex-wrap: wrap;
 }
 .detailElement{
@@ -157,11 +158,11 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-top: 88px;
+    margin-top: 48px;
 
     h4{
         font-weight: 600;
-        font-size: 24px;
+        font-size: 20px;
         line-height: 133%;
         color: var(--main);
 
@@ -171,6 +172,60 @@
 
 .commentWrapper{
     display: flex;
+    flex-direction: column;
     width: 100%;
-    gap: 48px;
+    gap: 24px;
+}
+
+@media (min-width: 768px){
+    .catalogDetailsContainer{
+        padding: 32px;
+    }
+
+    .truckDescriptionWrapper,
+    .truckInfoWrapper{
+        padding: 24px;
+    }
+
+    .truckDescriptionWrapper .priceInfo{
+        font-size: 24px;
+    }
+
+    .price{
+        font-size: 24px;
+    }
+
+    .details h4,
+    .bottomPart h4{
+        font-size: 24px;
+    }
+
+    .bottomPart{
+        margin-top: 64px;
+    }
+}
+
+@media (min-width: 1440px){
+    .catalogDetailsContainer{
+        padding: 48px 63px;
+    }
+
+    .topPart{
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .mainInfo{
+        flex: 1;
+    }
+
+    .bottomPart{
+        margin-top: 88px;
+    }
+
+    .commentWrapper{
+        flex-direction: row;
+        gap: 48px;
+    }
 }
