@@ -18,8 +18,8 @@ const NotFound = () => {
       </div>
 
       <div className={style.notFoundBtns}>
-            <button className={style.btnSearch} onClick={() => router.push('/catalog')}>Search</button>
             <button className={style.btnReset} onClick={() => router.push(pathname)}> <RxCross1 aria-hidden="true"/>  Clear filters</button>
+            <button className={style.btnSearch} onClick={() => router.push('/catalog')}>View all campers</button>
       </div>
     </section>
   )

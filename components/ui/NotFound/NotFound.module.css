@@ -60,12 +60,11 @@
 @media (min-width: 768px){
     .notFoundBtns{
         flex-direction: row;
-        width: auto;
     }
 }
 
 .btnSearch{
-    border-radius: 200px;
+    border-radius: 20px;
     padding: 16px 0;
     background: var(--grey-green);
     width: 100%;
@@ -88,7 +87,7 @@
 
 .btnReset{
     border: 1px solid var(--gray-light);
-    border-radius: 200px;
+    border-radius: 20px;
     padding: 16px 0;
     width: 100%;
     max-width: 192px;
